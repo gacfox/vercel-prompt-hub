@@ -2,6 +2,12 @@
 
 AI Prompt 分享与管理平台，支持文本提示词、绘图提示词、Agent Skills、Shell 命令四种内容类型的发布、浏览与管理。
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fgacfox%2Fvercel-prompt-hub)
+
+## 截图
+
+![](doc/screenshot.png)
+
 ## 功能
 
 - **内容管理** — 支持文本、绘图、Agent Skills、Shell 命令四种类型
