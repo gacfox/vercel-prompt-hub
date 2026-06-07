@@ -1,0 +1,50 @@
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { ShellForm } from "@/components/publish/shell-form";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
+import { getCurrentUser } from "@/lib/auth";
+
+export default async function PublishShellPage() {
+  const headersList = await headers();
+  const user = await getCurrentUser(headersList);
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  return (
+    <div className="flex flex-col flex-1">
+      <div className="border-b px-6 py-3">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">首页</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/content/publish">发布内容</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Shell命令</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
+      <div className="flex-1 p-6">
+        <div className="mx-auto max-w-2xl">
+          <h1 className="mb-6 text-2xl font-bold">发布 Shell 命令</h1>
+          <ShellForm />
+        </div>
+      </div>
+    </div>
+  );
+}
