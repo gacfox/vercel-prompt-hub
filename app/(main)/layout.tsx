@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 
 export default function MainLayout({
@@ -7,7 +8,9 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <Sidebar />
+      <Suspense>
+        <Sidebar />
+      </Suspense>
       <div className="flex-1 overflow-auto">{children}</div>
     </>
   );

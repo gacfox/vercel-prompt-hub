@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { sql } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
@@ -119,13 +120,15 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         </Breadcrumb>
       </div>
 
-      <ContentFilters
-        initialType={type}
-        initialKeyword={keyword}
-        initialScope={scope as "all" | "mine"}
-        initialOrder={order as "asc" | "desc"}
-        isLoggedIn={!!user}
-      />
+      <Suspense>
+        <ContentFilters
+          initialType={type}
+          initialKeyword={keyword}
+          initialScope={scope as "all" | "mine"}
+          initialOrder={order as "asc" | "desc"}
+          isLoggedIn={!!user}
+        />
+      </Suspense>
 
       <div className="flex-1 p-6">
         <ContentList
