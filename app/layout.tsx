@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { NavigationProgress } from "@/components/layout/navigation-progress";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
@@ -33,10 +34,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
-          <TooltipProvider>
-            <Header />
-            <div className="flex flex-1 overflow-hidden">{children}</div>
-          </TooltipProvider>
+          <NavigationProgress>
+            <TooltipProvider>
+              <Header />
+              <div className="flex flex-1 overflow-hidden">{children}</div>
+            </TooltipProvider>
+          </NavigationProgress>
         </ThemeProvider>
       </body>
     </html>

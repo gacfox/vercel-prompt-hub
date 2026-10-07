@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "@neondatabase/serverless": "^1.1.0",
     "@upstash/redis": "^1.38.0",
     "@vercel/edge-config": "^1.4.3",
