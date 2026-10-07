@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Heart } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -28,12 +29,24 @@ export function LikeButton({
       const res = await fetch(`/api/likes/${contentId}`, { method: "POST" });
       const data = await res.json();
 
-      if (data.success) {
+      if (res.ok && data.success) {
         setLiked(data.data.liked);
         setCount(data.data.count);
+      } else if (res.status === 401) {
+        toast.error("请先登录", {
+          action: {
+            label: "去登录",
+            onClick: () => {
+              window.location.href = "/login";
+            },
+          },
+        });
+      } else {
+        toast.error(data.error || "操作失败");
       }
     } catch (error) {
       console.error("[vph] Like toggle error:", error);
+      toast.error("网络错误，请稍后重试");
     } finally {
       setLoading(false);
     }
